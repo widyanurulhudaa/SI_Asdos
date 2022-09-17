@@ -22,3 +22,21 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::group(['middleware'=>['auth' ,'role:mahasiswa']],function(){
+    Route::get('/mahasiswa', function () {
+        return 'ini halaman mahasiswa ';
+    });
+});
+
+Route::group(['middleware'=>['auth' ,'role:admin']],function(){
+    Route::get('/admin', function () {
+        return 'ini halaman admin ';
+    });
+});
+
+Route::group(['middleware'=>['auth' ,'role:dosen']],function(){
+    Route::get('/dosen', function () {
+        return 'ini halaman dosen ';
+    });
+});
